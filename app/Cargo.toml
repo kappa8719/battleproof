@@ -19,5 +19,8 @@ console_error_panic_hook = "0.1.7"
 validator = "0.20"
 
 [build-dependencies]
+interoper = { git = "https://github.com/kappa8719/interoper" }
+anyhow = "1"
 serde = "1"
 serde_json = "1"
+walkdir = "2"

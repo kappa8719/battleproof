@@ -1,0 +1,103 @@
+@theme {
+    --ease-spring: linear(0, 0.0018, 0.0069 1.15%, 0.026 2.3%, 0.0637, 0.1135 5.18%, 0.2229 7.78%, 0.5977 15.84%, 0.7014, 0.7904, 0.8641, 0.9228, 0.9676 28.8%, 1.0032 31.68%, 1.0225, 1.0352 36.29%, 1.0431 38.88%, 1.046 42.05%, 1.0448 44.35%, 1.0407 47.23%, 1.0118 61.63%, 1.0025 69.41%, 0.9981 80.35%, 0.9992 99.94%);
+}
+
+.pop-in {
+
+}
+
+:where(.modal[open], .modal-open, .modal-toggle:checked + .modal):not(.modal-start, .modal-end) {
+    scrollbar-gutter: unset !important;
+}
+
+/* daisyui components override */
+@utility btn {
+    @apply transition-all;
+    --btn-shadow: "";
+
+    &:active:not(.btn-active) {
+        scale: 0.95;
+    }
+
+    &:focus-visible {
+        @apply ring-2 ring-offset-2;
+        outline: 2px transparent;
+        isolation: isolate;
+    }
+}
+
+@utility modal {
+    @apply h-screen;
+}
+
+@utility modal-backdrop {
+    button {
+        cursor: default;
+    }
+}
+
+@utility input {
+    @apply transition-all ring-0 ring-offset-0;
+    outline: none;
+
+    &:focus,
+    &:focus-within {
+        border-color: transparent;
+        outline: 0;
+        @apply ring-2 ring-offset-2 bg-primary/20;
+    }
+}
+
+.dialog {
+    --_duration: 0.86s;
+
+    opacity: 0;
+    transform: scale(0.8);
+
+    /* Transition properties with allow-discrete for display and overlay */
+    transition: opacity var(--_duration) var(--ease-spring),
+    transform var(--_duration) var(--ease-spring),
+    overlay var(--_duration),
+    display var(--_duration);
+    transition-behavior: allow-discrete;
+    pointer-events: none;
+
+    &[open] {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        pointer-events: auto;
+
+        @starting-style {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+    }
+
+    &::backdrop {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+
+        /* Backdrop transitions */
+        transition: background-color var(--_duration) var(--ease-spring),
+        backdrop-filter var(--_duration) var(--ease-spring),
+        overlay var(--_duration),
+        display var(--_duration);
+        transition-behavior: allow-discrete;
+
+
+        @starting-style {
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0px);
+        }
+    }
+
+    &[open]::backdrop {
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(1px);
+
+        @starting-style {
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0px);
+        }
+    }
+}
