@@ -1,17 +1,13 @@
 //! Assign and retrieve id for elements
 
-use std::time::{SystemTime, UNIX_EPOCH};
-
+use chrono::Local;
 use snowflake::{Snowflake, SnowflakeBuilder};
 use web_sys::HtmlElement;
 
 static mut SNOWFLAKE: Snowflake = Snowflake::new(0, 0);
 
 pub fn initialize() {
-    let time = SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .unwrap()
-        .as_millis() as u64;
+    let time = Local::now().timestamp_millis() as u64;
     unsafe {
         SNOWFLAKE = SnowflakeBuilder::new().epoch(time).build();
     }

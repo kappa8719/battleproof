@@ -8,6 +8,7 @@ forced-target = "wasm32-unknown-unknown"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
+chrono = { version = "0", features = ["wasmbind"]}
 tokio = { version = "1.47", features = ["macros", "rt", "time"] }
 sycamore = { version = "0.9", features = ["suspense"] }
 sycamore-router = "0.9"
@@ -15,7 +16,7 @@ gloo = "0.11"
 wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"
 js-sys = "0.3"
-web-sys = { version = "0.3", features = ["CssStyleDeclaration", "HtmlElement", "HtmlDialogElement"] }
+web-sys = { version = "0.3", features = ["CssStyleDeclaration", "HtmlElement", "HtmlDialogElement", "ShadowRoot"] }
 serde-wasm-bindgen = "0.6"
 serde = { version = "1", features = ["derive"] }
 console_error_panic_hook = "0.1.7"
